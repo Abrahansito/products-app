@@ -1,0 +1,52 @@
+<div class="products-container">
+  <div class="header">
+    <h2>Lista de productos</h2>
+    <button class="btn-add" (click)="openCreate()">Agregar producto</button>
+  </div>
+
+  <div *ngIf="loading">
+    Cargando productos...
+  </div>
+
+  <div *ngIf="errorMessage" style="color: red; padding: 1rem;">
+    {{ errorMessage }}
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Categoría</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of products; let i = index">
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.description }}</td>
+        <td>${{ p.price }}</td>
+        <td>{{ p.category }}</td>
+        <td class="actions">
+          <button class="btn-edit" (click)="openEdit(p)" title="Editar">✏️</button>
+          <button class="btn-delete" (click)="delete(p.id)" title="Eliminar">❌</button>
+        </td>
+      </tr>
+      <tr *ngIf="products.length === 0">
+        <td colspan="6" class="no-data">No hay productos disponibles</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<app-product-form
+  *ngIf="showModal"
+  [product]="selectedProduct"
+  (saved)="onSaved()"
+  (cancelled)="onCancelled()"
+></app-product-form>
