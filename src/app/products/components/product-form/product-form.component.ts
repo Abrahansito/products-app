@@ -31,19 +31,43 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.product?.id) {
-      // Actualizar
-      this.productsService.updateProduct(this.product.id, this.formData).subscribe(() => {
-        this.saved.emit();
-      });
-    } else {
-      // Crear
-      this.productsService.createProduct(this.formData).subscribe(() => {
-        this.saved.emit();
-      });
-    }
-  }
+  // Convertir precio a número
+  const productData = {
+    name: this.formData.name,
+    description: this.formData.description,
+    price: Number(this.formData.price) || 0,
+    category: this.formData.category
+  };
 
+  if (this.product?.id) {
+    // Asegurar que el ID es un número limpio
+    const productId = Number(String(this.product.id).split(':')[0]);
+
+    console.log('Actualizando producto ID:', productId);
+    console.log('Data:', productData);
+
+    this.productsService.updateProduct(productId, productData).subscribe({
+      next: () => {
+        this.saved.emit();
+      },
+      error: (err) => {
+        console.error('Error al actualizar:', err);
+        alert('Error al actualizar el producto: ' + (err.error?.message || err.message));
+      }
+    });
+  } else {
+    // Crear
+    this.productsService.createProduct(productData).subscribe({
+      next: () => {
+        this.saved.emit();
+      },
+      error: (err) => {
+        console.error('Error al crear:', err);
+        alert('Error al crear el producto');
+      }
+    });
+  }
+}
   onCancel() {
     this.cancelled.emit();
   }

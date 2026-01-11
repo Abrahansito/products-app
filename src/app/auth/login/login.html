@@ -1,23 +1,43 @@
 <div class="login-container">
-<form [formGroup]="form" (ngSubmit)="login()" class="login-card">
+  <form [formGroup]="form" (ngSubmit)="login()" class="login-card">
+    <h2>Iniciar sesión</h2>
 
-  <h2>Iniciar sesión</h2>
+    <div class="form-group">
+      <input
+        type="text"
+        placeholder="Usuario"
+        formControlName="username"
+        [class.error]="username?.invalid && username?.touched"
+      />
+      <div class="error-message" *ngIf="username?.invalid && username?.touched">
+        <span *ngIf="username?.errors?.['required']">El usuario es obligatorio</span>
+        <span *ngIf="username?.errors?.['minlength']">Mínimo 3 caracteres</span>
+      </div>
+    </div>
 
-  <input
-    type="text"
-    placeholder="Usuario"
-    formControlName="username"
-  />
+    <div class="form-group">
+      <input
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password"
+        [class.error]="password?.invalid && password?.touched"
+      />
+      <div class="error-message" *ngIf="password?.invalid && password?.touched">
+        <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria</span>
+        <span *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres</span>
+      </div>
+    </div>
 
-  <input
-    type="password"
-    placeholder="Contraseña"
-    formControlName="password"
-  />
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
 
-  <button type="submit">Ingresar</button>
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Cargando...' : 'Ingresar' }}
+    </button>
 
-</form>
-
+    <div class="register-link">
+      ¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a>
+    </div>
+  </form>
 </div>
-
