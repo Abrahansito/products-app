@@ -1,5 +1,5 @@
 <div class="login-container">
-  <form [formGroup]="form" (ngSubmit)="login()" class="login-card">
+  <form [formGroup]="form" (submit)="login($event)" class="login-card">
     <h2>Iniciar sesión</h2>
 
     <div class="form-group">

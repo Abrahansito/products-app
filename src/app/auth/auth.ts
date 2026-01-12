@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap, catchError, of, map } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 export interface User {
   id: number;
@@ -11,7 +11,7 @@ export interface User {
 
 export interface AuthResponse {
   access_token: string;
-  user: User;
+  user?: User;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -30,7 +30,6 @@ export class AuthService {
   private loadUserFromStorage() {
     const userStr = localStorage.getItem('user');
 
-    // Verificar que el string no sea undefined, null, o vacío
     if (!userStr || userStr === 'undefined' || userStr === 'null') {
       localStorage.removeItem('user');
       return;
@@ -38,7 +37,6 @@ export class AuthService {
 
     try {
       const user = JSON.parse(userStr);
-      // Verificar que el objeto parseado sea válido
       if (user && user.id && user.username) {
         this.currentUserSubject.next(user);
       } else {
@@ -53,8 +51,10 @@ export class AuthService {
   login(data: { username: string; password: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.api}/auth/login`, data).pipe(
       tap(response => {
-        if (response && response.access_token && response.user) {
+        if (response && response.access_token) {
           this.saveToken(response.access_token);
+        }
+        if (response && response.user) {
           this.saveUser(response.user);
           this.currentUserSubject.next(response.user);
         }
@@ -65,8 +65,10 @@ export class AuthService {
   register(data: { username: string; password: string; email?: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.api}/auth/register`, data).pipe(
       tap(response => {
-        if (response && response.access_token && response.user) {
+        if (response && response.access_token) {
           this.saveToken(response.access_token);
+        }
+        if (response && response.user) {
           this.saveUser(response.user);
           this.currentUserSubject.next(response.user);
         }
