@@ -1,12 +1,13 @@
 {
   "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist/products-app" }
-    }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+ {
+  "src": "package.json",
+  "use": "@vercel/static-build",
+  "config": { "distDir": "dist/products-app/browser" }
+ }
+ ],
+  "rewrites": [
+  { "source": "/(.*)", "destination": "/index.html" }
+ ]
 }
+
