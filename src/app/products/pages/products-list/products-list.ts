@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products-list',
@@ -24,30 +25,24 @@ export class ProductsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit ejecutado');
     this.loadProducts();
   }
 
   loadProducts(): void {
-    console.log('loadProducts llamado');
     this.loading = true;
     this.errorMessage = '';
 
     this.productsService.getProducts().subscribe({
       next: (res) => {
-        console.log('Respuesta recibida:', res);
         this.products = res;
         this.loading = false;
-        this.cdr.detectChanges(); // Forzar detección de cambios
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error:', err);
         this.errorMessage = 'Error al cargar productos';
         this.loading = false;
-        this.cdr.detectChanges(); //Forzar detección de cambios
-      },
-      complete: () => {
-        console.log('Observable completado');
+        this.cdr.detectChanges();
       }
     });
   }
@@ -63,11 +58,38 @@ export class ProductsListComponent implements OnInit {
   }
 
   delete(id: number): void {
-    if (confirm('¿Eliminar producto?')) {
-      this.productsService.deleteProduct(id).subscribe(() => {
-        this.loadProducts();
-      });
-    }
+    Swal.fire({
+      title: '¿Eliminar producto?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productsService.deleteProduct(id).subscribe({
+          next: () => {
+            Swal.fire({
+              toast: true,
+              position: 'top-end',
+              icon: 'success',
+              title: 'Producto eliminado',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.loadProducts();
+          },
+          error: (err) => {
+            console.error('Error eliminando:', err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: err.error?.message || err.message || 'No se pudo eliminar el producto'
+            });
+          }
+        });
+      }
+    });
   }
 
   onSaved(): void {
