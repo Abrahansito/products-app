@@ -4,6 +4,17 @@
     <button class="btn-add" (click)="openCreate()">Agregar producto</button>
   </div>
 
+  <div class="search-bar" style="margin: 1rem 0; display:flex; gap:0.5rem; align-items:center;">
+    <input
+      type="text"
+      placeholder="Buscar productos..."
+      [(ngModel)]="searchTerm"
+      (input)="onSearch(searchTerm)"
+      style="flex:1; padding:0.5rem; border-radius:4px; border:1px solid #ccc;"
+    />
+    <button *ngIf="searchTerm" (click)="clearSearch()" style="padding:0.5rem 0.75rem;">Limpiar</button>
+  </div>
+
   <div *ngIf="loading">
     Cargando productos...
   </div>
