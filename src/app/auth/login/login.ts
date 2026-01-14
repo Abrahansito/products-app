@@ -5,11 +5,12 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth';
 import { finalize } from 'rxjs/operators';
 import { CardModule } from 'primeng/card';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { ChangeDetectorRef } from '@angular/core';
+import { UiButtonComponent } from '../../shared/ui/ui-button/ui-button.component';
+import { UiInputTextComponent } from '../../shared/ui/ui-input-text/ui-input-text.component';
+import { FormControl } from '@angular/forms';
+import { UiInputPasswordComponent } from '../../shared/ui/ui-input-password/ui-input-password.component';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,10 @@ import { ChangeDetectorRef } from '@angular/core';
     ReactiveFormsModule,
     RouterModule,
     CardModule,
-    InputTextModule,
-    PasswordModule,
-    ButtonModule,
-    MessageModule
+    MessageModule,
+    UiButtonComponent,
+    UiInputTextComponent,
+    UiInputPasswordComponent
   ],
   templateUrl: './login.html',
   styleUrl: './login.css'
@@ -45,8 +46,8 @@ export class LoginComponent {
   }
 
   // Getters para los controles del formulario
-  get username() { return this.form.get('username'); }
-  get password() { return this.form.get('password'); }
+  get username(): FormControl { return this.form.get('username') as FormControl; }
+  get password(): FormControl { return this.form.get('password') as FormControl; }
 
   login(event?: Event) {
     if (event) event.preventDefault();

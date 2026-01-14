@@ -1,60 +1,32 @@
 <div class="login-container flex justify-content-center align-items-center min-h-screen">
 
-  <p-card header="Iniciar sesión" [style]="{ width: '100%', maxWidth: '400px' }" class="p-fluid">
+  <p-card header="Iniciar sesión" [style]="{ width: '100%', maxWidth: '400px' }" styleClass="p-fluid">
 
     <form [formGroup]="form" (submit)="login($event)">
 
-      <div class="field mb-4">
-        <label for="username" class="font-bold block mb-2">Usuario</label>
-        <input
-          pInputText
-          id="username"
-          formControlName="username"
-          placeholder="Ingresa tu usuario"
-          class="w-full"
-          [ngClass]="{'ng-invalid ng-dirty': username?.invalid && username?.touched}"
-        />
-        <small *ngIf="username?.invalid && username?.touched" class="p-error block mt-1">
-            <span *ngIf="username?.errors?.['required']">El usuario es obligatorio.</span>
-            <span *ngIf="username?.errors?.['minlength']">Mínimo 3 caracteres.</span>
-        </small>
-      </div>
+      <app-ui-input-text
+        label="Usuario"
+        placeholder="Ingresa tu usuario"
+        [control]="username">
+      </app-ui-input-text>
 
-      <div class="field mb-4">
-        <label for="password" class="font-bold block mb-2">Contraseña</label>
-        <p-password
-          id="password"
-          formControlName="password"
-          [toggleMask]="true"
-          [feedback]="false"
-          placeholder="******"
-          class="w-full"
-          inputStyleClass="w-full"
-          [ngClass]="{'ng-invalid ng-dirty': password?.invalid && password?.touched}">
-        </p-password>
-
-        <small *ngIf="password?.invalid && password?.touched" class="p-error block mt-1">
-            <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria.</span>
-            <span *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres.</span>
-        </small>
-      </div>
+      <app-ui-input-password
+      label="Contraseña"
+      [control]="password">
+      </app-ui-input-password>
 
       <div class="mb-3" *ngIf="errorMessage">
-          <p-message
-            severity="error"
-            [text]="errorMessage"
-            styleClass="w-full justify-content-start">
-          </p-message>
+         <p-message severity="error" [text]="errorMessage" styleClass="w-full"></p-message>
       </div>
 
-
-      <p-button
+      <app-ui-button
         label="Ingresar"
-        icon="pi pi-sign-in"
+        variant="primary"
         type="submit"
+        icon="pi pi-sign-in"
         [loading]="loading"
-        styleClass="w-full p-button-primary">
-      </p-button>
+        (onClick)="login()">
+      </app-ui-button>
 
       <div class="text-center mt-4 text-sm text-500">
         ¿No tienes cuenta? <a routerLink="/register" class="font-bold text-primary no-underline hover:underline">Regístrate aquí</a>

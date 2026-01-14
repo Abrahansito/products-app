@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita scroll horizontal */
+    font-family: var(--font-family);
+}
+
+.p-card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+}
+
+.p-card-title {
+    text-align: center;
+    font-size: 1.75rem !important;
+    font-weight: 700;
+    color: #fff !important;
+    margin-bottom: 0.75rem;
+}
+
+/* Textos Globales */
+label {
+    color: #e0e0e0;
+}
+
+/* Errores Globales */
+.p-error {
+    color: #ef4444;
+}
+
+/* Inputs */
+.p-inputtext:enabled:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}

@@ -6,57 +6,49 @@
     (onHide)="closeDialog()"
     styleClass="p-fluid">
 
-    <ng-template pTemplate="content">
-        <div class="field flex flex-column gap-2 mb-3">
-            <label for="name" class="font-bold">Nombre</label>
-            <input pInputText id="name" [(ngModel)]="formData.name" required autofocus />
-        </div>
+    <form [formGroup]="form" class="flex flex-column gap-2 mt-3">
 
-        <div class="field flex flex-column gap-2 mb-3">
-            <label for="description" class="font-bold">Descripción</label>
-            <textarea
-                pTextarea
-                id="description"
-                [(ngModel)]="formData.description"
-                rows="3"
-                cols="20">
-            </textarea>
-        </div>
+        <app-ui-input-text
+            label="Nombre"
+            placeholder="Nombre del producto"
+            [control]="nameControl"> </app-ui-input-text>
 
-        <div class="field flex flex-column gap-2 mb-3">
-            <label for="category" class="font-bold">Categoría</label>
-            <input pInputText id="category" [(ngModel)]="formData.category" />
-        </div>
+        <app-ui-input-textarea
+            label="Descripción"
+            [control]="descControl"> </app-ui-input-textarea>
 
-        <div class="field flex flex-column gap-2 mb-3">
-            <label for="price" class="font-bold">Precio</label>
-            <p-inputNumber
-                id="price"
-                [(ngModel)]="formData.price"
-                mode="currency"
-                currency="USD"
-                locale="en-US">
-            </p-inputNumber>
-        </div>
-    </ng-template>
+        <app-ui-input-text
+            label="Categoría"
+            placeholder="Categoría del producto"
+            [control]="catControl"> </app-ui-input-text>
+
+        <app-ui-input-number
+            label="Precio"
+            mode="currency"
+            currency="USD"
+            locale="en-US"
+            [control]="priceControl"> </app-ui-input-number>
+
+    </form>
 
     <ng-template pTemplate="footer">
-        <button
-            pButton
-            pRipple
-            label="Cancelar"
-            icon="pi pi-times"
-            class="p-button-text"
-            (click)="closeDialog()">
-        </button>
-        <button
-            pButton
-            pRipple
-            label="Guardar"
-            icon="pi pi-check"
-            class="p-button-text"
-            (click)="onSubmit()">
-        </button>
+        <div class="flex justify-content-end gap-2">
+
+            <app-ui-button
+                label="Cancelar"
+                variant="secondary"
+                icon="pi pi-times"
+                (onClick)="closeDialog()">
+            </app-ui-button>
+
+            <app-ui-button
+                label="Guardar"
+                variant="primary"
+                icon="pi pi-check"
+                (onClick)="onSubmit()">
+            </app-ui-button>
+
+        </div>
     </ng-template>
 
 </p-dialog>

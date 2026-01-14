@@ -125,7 +125,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       this.productsService.deleteProduct(productId).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Producto eliminado correctamente', life: 2000 });
-          this.loadProducts(); // o la lógica para refrescar la lista
+          this.loadProducts();
         },
         error: (err) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.message || err.message || 'No se pudo eliminar' });

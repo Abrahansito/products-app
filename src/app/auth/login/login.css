@@ -1,30 +1,10 @@
 .login-container {
     background-color: #121212;
-    min-height: 100vh;
+    height: 100vh;        
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
-}
-
-/* Personalización para Dark Mode de PrimeNG */
-:host ::ng-deep .p-card {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    border: 1px solid #333;
-}
-
-:host ::ng-deep .p-card-title {
-    text-align: center;
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-/* Ajustes de inputs en modo oscuro */
-label {
-    color: #e0e0e0;
-}
-
-/* Color de error */
-.p-error {
-    color: #ef4444;
+    box-sizing: border-box;
 }
