@@ -1,43 +1,65 @@
-<div class="login-container">
-  <form [formGroup]="form" (submit)="login($event)" class="login-card">
-    <h2>Iniciar sesión</h2>
+<div class="login-container flex justify-content-center align-items-center min-h-screen">
 
-    <div class="form-group">
-      <input
-        type="text"
-        placeholder="Usuario"
-        formControlName="username"
-        [class.error]="username?.invalid && username?.touched"
-      />
-      <div class="error-message" *ngIf="username?.invalid && username?.touched">
-        <span *ngIf="username?.errors?.['required']">El usuario es obligatorio</span>
-        <span *ngIf="username?.errors?.['minlength']">Mínimo 3 caracteres</span>
+  <p-card header="Iniciar sesión" [style]="{ width: '100%', maxWidth: '400px' }" class="p-fluid">
+
+    <form [formGroup]="form" (submit)="login($event)">
+
+      <div class="field mb-4">
+        <label for="username" class="font-bold block mb-2">Usuario</label>
+        <input
+          pInputText
+          id="username"
+          formControlName="username"
+          placeholder="Ingresa tu usuario"
+          class="w-full"
+          [ngClass]="{'ng-invalid ng-dirty': username?.invalid && username?.touched}"
+        />
+        <small *ngIf="username?.invalid && username?.touched" class="p-error block mt-1">
+            <span *ngIf="username?.errors?.['required']">El usuario es obligatorio.</span>
+            <span *ngIf="username?.errors?.['minlength']">Mínimo 3 caracteres.</span>
+        </small>
       </div>
-    </div>
 
-    <div class="form-group">
-      <input
-        type="password"
-        placeholder="Contraseña"
-        formControlName="password"
-        [class.error]="password?.invalid && password?.touched"
-      />
-      <div class="error-message" *ngIf="password?.invalid && password?.touched">
-        <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria</span>
-        <span *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres</span>
+      <div class="field mb-4">
+        <label for="password" class="font-bold block mb-2">Contraseña</label>
+        <p-password
+          id="password"
+          formControlName="password"
+          [toggleMask]="true"
+          [feedback]="false"
+          placeholder="******"
+          class="w-full"
+          inputStyleClass="w-full"
+          [ngClass]="{'ng-invalid ng-dirty': password?.invalid && password?.touched}">
+        </p-password>
+
+        <small *ngIf="password?.invalid && password?.touched" class="p-error block mt-1">
+            <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria.</span>
+            <span *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres.</span>
+        </small>
       </div>
-    </div>
 
-    <div class="error-message" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </div>
+      <div class="mb-3" *ngIf="errorMessage">
+          <p-message
+            severity="error"
+            [text]="errorMessage"
+            styleClass="w-full justify-content-start">
+          </p-message>
+      </div>
 
-    <button type="submit" [disabled]="loading">
-      {{ loading ? 'Cargando...' : 'Ingresar' }}
-    </button>
 
-    <div class="register-link">
-      ¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a>
-    </div>
-  </form>
+      <p-button
+        label="Ingresar"
+        icon="pi pi-sign-in"
+        type="submit"
+        [loading]="loading"
+        styleClass="w-full p-button-primary">
+      </p-button>
+
+      <div class="text-center mt-4 text-sm text-500">
+        ¿No tienes cuenta? <a routerLink="/register" class="font-bold text-primary no-underline hover:underline">Regístrate aquí</a>
+      </div>
+
+    </form>
+  </p-card>
 </div>
