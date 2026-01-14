@@ -3,14 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
-import Swal from 'sweetalert2';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subject, Subscription, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, ProductFormComponent],
+  imports: [CommonModule, FormsModule, ProductFormComponent, TableModule, ButtonModule, InputTextModule, IconFieldModule, InputIconModule],
   templateUrl: './products-list.html',
   styleUrls: ['./products-list.css']
 })
@@ -27,7 +32,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private productsService: ProductsService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private confirmationService: ConfirmationService, private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -112,40 +118,22 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.showModal = true;
   }
 
-  delete(id: number): void {
-    Swal.fire({
-      title: '¿Eliminar producto?',
-      text: 'Esta acción no se puede deshacer',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.productsService.deleteProduct(id).subscribe({
-          next: () => {
-            Swal.fire({
-              toast: true,
-              position: 'top-end',
-              icon: 'success',
-              title: 'Producto eliminado',
-              showConfirmButton: false,
-              timer: 1500
-            });
-            this.loadProducts();
-          },
-          error: (err) => {
-            console.error('Error eliminando:', err);
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: err.error?.message || err.message || 'No se pudo eliminar el producto'
-            });
-          }
-        });
-      }
-    });
-  }
+  deleteProduct(productId: number) {
+  this.confirmationService.confirm({
+    message: '¿Confirmas eliminar este producto?',
+    accept: () => {
+      this.productsService.deleteProduct(productId).subscribe({
+        next: () => {
+          this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Producto eliminado correctamente', life: 2000 });
+          this.loadProducts(); // o la lógica para refrescar la lista
+        },
+        error: (err) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.message || err.message || 'No se pudo eliminar' });
+        }
+      });
+    }
+  });
+}
 
   onSaved(): void {
     this.showModal = false;

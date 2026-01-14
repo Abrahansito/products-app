@@ -1,89 +1,111 @@
+/*CONTENEDOR PRINCIPAL*/
 .products-container {
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  background-color: #121212; /* Fondo de la página */
+  min-height: 100vh;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+/*ESTILOS DE LA TABLA PRIMENG (DARK MODE)*/
+
+/*Cabecera donde está el buscador (Caption) */
+:host ::ng-deep .p-datatable .p-datatable-header {
+    background-color: #1e1e1e;
+    border: none;
+    padding: 1.5rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 h2 {
-  color: #333;
-  margin: 0;
+    color: white;
+    font-size: 1.5rem;
 }
 
-.btn-add {
-  background-color: #4CAF50;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+/* Encabezados de columnas (TH) */
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background-color: #2d2d2d; /* Gris un poco más claro */
+    color: #e0e0e0;
+    border-bottom: 1px solid #404040;
+    padding: 1rem;
 }
 
-.btn-add:hover {
-  background-color: #45a049;
+/*Iconos de ordenamiento (flechitas) */
+:host ::ng-deep .p-datatable .p-sortable-column-icon {
+    color: #a0a0a0; /* Que no sean negros, sino grises */
+}
+:host ::ng-deep .p-datatable .p-sortable-column:hover .p-sortable-column-icon {
+    color: #fff;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
+/*Cuerpo de la tabla (Filas y Celdas) */
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    transition: background-color 0.2s;
 }
 
-thead {
-  background-color: #f5f5f5;
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    border-bottom: 1px solid #333;
+    padding: 1rem;
 }
 
-th {
-  padding: 1rem;
-  text-align: left;
-  font-weight: 600;
-  color: #555;
-  border-bottom: 2px solid #e0e0e0;
+/* Hover effect: Cuando pasas el mouse por la fila */
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+    background-color: #2a2a2a !important;
 }
 
-td {
-  padding: 1rem;
-  border-bottom: 1px solid #f0f0f0;
+/* Paginador (La barra de abajo con los números)*/
+:host ::ng-deep .p-paginator {
+    background-color: #1e1e1e;
+    border-top: 1px solid #333;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 0.5rem;
 }
 
-tbody tr:hover {
-  background-color: #f9f9f9;
+/* Botones del paginador */
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page,
+:host ::ng-deep .p-paginator .p-paginator-first,
+:host ::ng-deep .p-paginator .p-paginator-prev,
+:host ::ng-deep .p-paginator .p-paginator-next,
+:host ::ng-deep .p-paginator .p-paginator-last {
+    color: #d4d4d4;
+    background-color: transparent;
 }
 
-.actions {
-  display: flex;
-  gap: 0.5rem;
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:hover {
+    background-color: #333;
+    color: white;
 }
 
-.btn-edit,
-.btn-delete {
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-  padding: 0.25rem;
-  transition: transform 0.2s;
+/* Página activa (seleccionada) */
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: #10b981; /* Verde esmeralda */
+    color: white;
 }
 
-.btn-edit:hover,
-.btn-delete:hover {
-  transform: scale(1.2);
+/*INPUTS Y BOTONES DENTRO DE LA TABLA*/
+
+/* Input del Buscador */
+:host ::ng-deep .p-input-icon-left > i {
+    color: #aaa; /* Icono de lupa */
 }
 
-.no-data {
-  text-align: center;
-  color: #999;
-  font-style: italic;
-  padding: 2rem;
+:host ::ng-deep input.p-inputtext {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    color: white;
 }
+:host ::ng-deep input.p-inputtext:focus {
+    border-color: #10b981; /* Borde verde al escribir */
+}
+
+/* Mensaje "No se encontraron productos" */
+:host ::ng-deep .p-datatable .p-datatable-emptymessage td {
+    background-color: #1e1e1e;
+    color: #888;
+    text-align: center;
+}
+
