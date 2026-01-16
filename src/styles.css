@@ -1,37 +1,100 @@
 body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Evita scroll horizontal */
     font-family: var(--font-family);
+    background-color: #f8fafc;
+    color: #334155;
 }
 
-.p-card {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    border: 1px solid #333;
+
+.p-card, .card {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+
 }
 
-.p-card-title {
-    text-align: center;
-    font-size: 1.75rem !important;
+
+.p-card-title, h3 {
+    color: #1e293b !important;
     font-weight: 700;
-    color: #fff !important;
-    margin-bottom: 0.75rem;
 }
 
-/* Textos Globales */
-label {
-    color: #e0e0e0;
+
+.p-datatable .p-datatable-thead > tr > th {
+    background-color: #f8fafc !important;
+    color: #475569 !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
-/* Errores Globales */
-.p-error {
-    color: #ef4444;
+
+.p-datatable .p-datatable-tbody > tr {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border-bottom: 1px solid #f1f5f9 !important;
 }
 
-/* Inputs */
+/* Efecto Hover en las filas */
+.p-datatable .p-datatable-tbody > tr:hover {
+    background-color: #f1f5f9 !important;
+}
+
+/* Texto vacío */
+.p-datatable .p-datatable-emptymessage td {
+    background-color: #ffffff !important;
+    color: #64748b !important;
+}
+
 .p-inputtext:enabled:focus {
-    border-color: #10b981;
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1) !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+    border-radius: 50%;                  
+}
+
+.p-error {
+    color: #ef4444 !important;
+}
+
+.p-datatable .p-datatable-header {
+    background-color: #ffffff !important;
+
+}
+
+.p-datatable-header .p-inputtext {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+.p-datatable-header .p-inputtext::placeholder {
+    color: #94a3b8 !important;
+}
+
+.p-datatable-header .p-inputicon {
+    color: #64748b !important;
+}
+
+.p-paginator .p-paginator-current {
+    color: #1e293b !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    font-size: 0.95rem !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+    color: #475569 !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: #ecfdf5 !important;
+    color: #10b981 !important;
 }

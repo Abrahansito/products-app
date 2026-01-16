@@ -15,10 +15,22 @@ export const routes: Routes = [
   //   path: 'register',
   //   loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent)
   // },
+
   {
-    path: 'products',
-    loadComponent: () => import('./products/pages/products-list/products-list').then(m => m.ProductsListComponent),
-    canActivate: [authGuard]
+    path: 'admin',
+    loadComponent: () => import('./shared/ui/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent),
+    canActivate: [authGuard],
+    children: [
+      {
+        path: 'products',
+        loadComponent: () => import('./products/pages/products-list/products-list').then(m => m.ProductsListComponent)
+      },
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '**',

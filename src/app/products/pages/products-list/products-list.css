@@ -2,13 +2,11 @@
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
-  background-color: #121212;
   min-height: 100vh;
 }
 
 /*Cabecera donde está el buscador (Caption) */
 :host ::ng-deep .p-datatable .p-datatable-header {
-    background-color: #1e1e1e;
     border: none;
     padding: 1.5rem;
     border-top-left-radius: 12px;
@@ -28,7 +26,7 @@ h2 {
     padding: 1rem;
 }
 
-/*Iconos de ordenamiento (flechitas) */
+/*Iconos de ordenamiento*/
 :host ::ng-deep .p-datatable .p-sortable-column-icon {
     color: #a0a0a0;
 }
@@ -36,7 +34,7 @@ h2 {
     color: #fff;
 }
 
-/*Cuerpo de la tabla (Filas y Celdas) */
+
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr {
     background-color: #1e1e1e;
     color: #d4d4d4;
@@ -48,15 +46,15 @@ h2 {
     padding: 1rem;
 }
 
-/* Hover effect: Cuando pasas el mouse por la fila */
+/*Cuando pasas el mouse por la fila */
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
-    background-color: #2a2a2a !important;
+    background-color: #a4a4a4cb !important;
 }
 
-/* Paginador (La barra de abajo con los números)*/
+/* La barra inferior del paginador */
 :host ::ng-deep .p-paginator {
-    background-color: #1e1e1e;
-    border-top: 1px solid #333;
+    background-color: #ffffff;
+    border-top: 1px solid #000000;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     padding: 0.5rem;
@@ -68,21 +66,20 @@ h2 {
 :host ::ng-deep .p-paginator .p-paginator-prev,
 :host ::ng-deep .p-paginator .p-paginator-next,
 :host ::ng-deep .p-paginator .p-paginator-last {
-    color: #d4d4d4;
+    color:#1e293b;
     background-color: transparent;
 }
 
 :host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:hover {
-    background-color: #333;
+    background-color: #000000;
     color: white;
 }
 
-/* Página activa (seleccionada) */
+/* Página activa*/
 :host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background-color: #10b981;
     color: white;
 }
-
 
 /* Input del Buscador */
 :host ::ng-deep .p-input-icon-left > i {
@@ -98,7 +95,7 @@ h2 {
     border-color: #10b981;
 }
 
-/* Mensaje "No se encontraron productos" */
+
 :host ::ng-deep .p-datatable .p-datatable-emptymessage td {
     background-color: #1e1e1e;
     color: #888;

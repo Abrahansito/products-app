@@ -11,11 +11,25 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { TagModule } from 'primeng/tag';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { UiButtonComponent } from '../../../shared/ui/ui-button/ui-button.component';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, ProductFormComponent, TableModule, ButtonModule, InputTextModule, IconFieldModule, InputIconModule],
+  imports: [CommonModule,
+    FormsModule,
+    ProductFormComponent,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    IconFieldModule,
+    InputIconModule,
+    TagModule,
+    ConfirmDialogModule,
+    UiButtonComponent
+  ],
   templateUrl: './products-list.html',
   styleUrls: ['./products-list.css']
 })

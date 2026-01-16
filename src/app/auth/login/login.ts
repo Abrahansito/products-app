@@ -67,7 +67,7 @@ export class LoginComponent {
       }))
       .subscribe({
         next: () => {
-          this.router.navigate(['/products']);
+          this.router.navigate(['/admin/products']);
         },
         error: (error) => {
           console.error('Error login:', error);
