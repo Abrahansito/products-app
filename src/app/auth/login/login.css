@@ -25,6 +25,8 @@
 
 :host ::ng-deep .p-card-title {
     color: white !important;
+    text-align-last: center !important;
+    font-size: 25px !important;
 }
 
 /* Inputs oscuros solo para el login */

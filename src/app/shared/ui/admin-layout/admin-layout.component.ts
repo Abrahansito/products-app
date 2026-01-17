@@ -36,7 +36,7 @@ import { MenuItem } from 'primeng/api';
             <div class="flex align-items-center gap-3">
                 <span class="text-sm font-bold text-gray-600">Admin User</span>
                 <p-avatar label="A" shape="circle" styleClass="bg-primary text-white cursor-pointer"></p-avatar>
-                <p-button icon="pi pi-power-off" [rounded]="true" [text]="true" severity="danger"></p-button>
+                <p-button icon="pi pi-sign-out" [rounded]="true" [text]="true" severity="danger"></p-button>
             </div>
         </header>
 
