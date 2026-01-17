@@ -134,7 +134,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   deleteProduct(productId: number) {
   this.confirmationService.confirm({
-    message: '¿Confirmas eliminar este producto?',
+    message: '¿Estás seguro de eliminar este producto?',
     accept: () => {
       this.productsService.deleteProduct(productId).subscribe({
         next: () => {
