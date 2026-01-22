@@ -1,34 +1,40 @@
-<div class="login-container flex justify-content-center align-items-center min-h-screen">
+<div class="login-container flex justify-content-center align-items-center min-h-screen bg-gray-900">
 
-  <p-card header="Iniciar sesión" [style]="{ width: '100%', maxWidth: '400px' }" styleClass="p-fluid"><br>
+  <p-card header="Iniciar sesión" [style]="{ width: '100%', maxWidth: '400px' }" styleClass="p-fluid shadow-4">
+
     <form [formGroup]="form" (submit)="login($event)">
 
-      <app-ui-input-text
-        label="Usuario"
-        placeholder="Ingresa tu usuario"
-        [control]="username">
+      <div class="mb-3">
+        <app-ui-input-text
+          label="Correo Electrónico"
+          placeholder="ejemplo@gmail.com"
+          [control]="email">
       </app-ui-input-text>
+      </div>
 
-      <app-ui-input-password
-      label="Contraseña"
-      [control]="password">
-      </app-ui-input-password>
+      <div class="mb-3">
+        <app-ui-input-password
+          label="Contraseña"
+          [control]="password">
+        </app-ui-input-password>
+      </div>
 
       <div class="mb-3" *ngIf="errorMessage">
          <p-message severity="error" [text]="errorMessage" styleClass="w-full"></p-message>
       </div>
 
-      <app-ui-button
-        label="Ingresar"
-        variant="primary"
-        type="submit"
-        icon="pi pi-sign-in"
-        [loading]="loading"
-        (onClick)="login()">
-      </app-ui-button>
+      <div class="mb-3">
+         <app-ui-button
+          label="Ingresar"
+          variant="primary"
+          icon="pi pi-sign-in"
+          [loading]="loading"
+          (onClick)="login()">
+        </app-ui-button>
+      </div>
 
       <div class="text-center mt-4 text-sm text-500">
-        ¿No tienes cuenta? <a routerLink="/register" class="font-bold text-primary no-underline hover:underline">Regístrate aquí</a>
+        ¿No tienes cuenta? <a routerLink="/register" class="font-bold text-primary no-underline hover:underline cursor-pointer">Regístrate aquí</a>
       </div>
 
     </form>

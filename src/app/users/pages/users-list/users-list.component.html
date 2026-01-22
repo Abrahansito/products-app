@@ -1,0 +1,142 @@
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<div class="users-container">
+    <div class="card shadow-2 border-round surface-card">
+        <p-table
+            #dt
+            [value]="users"
+            [loading]="loading"
+            [tableStyle]="{'min-width': '50rem'}"
+            [paginator]="true"
+            [rows]="5"
+            [rowsPerPageOptions]="[5, 10, 20]">
+
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:align-items-center justify-content-between gap-3">
+                    <h2 class="m-0 text-gray-700">Gestión de Usuarios</h2>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="full_name">Nombre <p-sortIcon field="full_name"></p-sortIcon></th>
+                    <th pSortableColumn="email">Correo Electrónico <p-sortIcon field="email"></p-sortIcon></th>
+                    <th class="text-center" pSortableColumn="role">Rol <p-sortIcon field="role"></p-sortIcon></th>
+                    <th pSortableColumn="created_at">Fecha Registro <p-sortIcon field="created_at"></p-sortIcon></th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td class="font-bold">{{ user.full_name }}</td>
+                    <td>{{ user.email }}</td>
+
+                    <td class="text-center">
+                        <p-tag
+                            [value]="user.role | uppercase"
+                            [severity]="user.role === 'admin' ? 'success' : 'info'"
+                            [icon]="user.role === 'admin' ? 'pi pi-shield' : 'pi pi-user'"
+                            [rounded]="true">
+                        </p-tag>
+                    </td>
+
+                    <td>{{ user.created_at | date:'short' }}</td>
+
+                    <td class="text-center">
+                        <div class="flex justify-content-center gap-2">
+                            <div style="width: 40px;">
+                                <app-ui-button
+                                    icon="pi pi-pencil"
+                                    variant="secondary"
+                                    tooltipPosition="top"
+                                    (onClick)="editUser(user)">
+                                </app-ui-button>
+                            </div>
+
+                            <div style="width: 40px;">
+                                <app-ui-button
+                                    icon="pi pi-trash"
+                                    variant="danger"
+                                    tooltipPosition="top"
+                                    (onClick)="deleteUser(user)">
+                                </app-ui-button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="5" class="text-center p-4">
+                        <i class="pi pi-users text-4xl text-gray-400 mb-2 block"></i>
+                        <span class="text-gray-500">No se encontraron usuarios.</span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<p-dialog
+    [(visible)]="displayDialog"
+    [style]="{width: '450px'}"
+    header="Editar Usuario"
+    [modal]="true"
+    styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <form [formGroup]="userForm" class="mt-2">
+
+            <div class="mb-3">
+                <app-ui-input-text
+                    label="Nombre Completo"
+                    [control]="full_name">
+                </app-ui-input-text>
+            </div>
+
+            <div class="mb-3">
+                <app-ui-input-text
+                    label="Correo Electrónico"
+                    [control]="email">
+                </app-ui-input-text>
+            </div>
+
+            <div class="field mb-3">
+                <label for="role" class="font-bold block mb-2 text-900">Rol de Usuario</label>
+                <select
+                    id="role"
+                    formControlName="role"
+                    class="p-inputtext w-full cursor-pointer"
+                    style="padding: 0.75rem;">
+                    <option value="" disabled>Selecciona un rol</option>
+                    <option value="admin">ADMINISTRADOR</option>
+                    <option value="user">USUARIO</option>
+                </select>
+                <small *ngIf="role.invalid && role.touched" class="p-error block mt-1">
+                    El rol es requerido.
+                </small>
+            </div>
+
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-content-end gap-2">
+            <app-ui-button
+                label="Cancelar"
+                variant="secondary"
+                icon="pi pi-times"
+                (onClick)="displayDialog = false">
+            </app-ui-button>
+
+            <app-ui-button
+                label="Guardar Cambios"
+                variant="primary"
+                icon="pi pi-check"
+                (onClick)="saveUser()">
+            </app-ui-button>
+        </div>
+    </ng-template>
+</p-dialog>

@@ -8,7 +8,7 @@ import { TextareaModule } from 'primeng/textarea';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TextareaModule],
   template: `
-    <div class="field mb-4">
+    <div class="field mb-3">
       <label *ngIf="label" class="font-bold block mb-2">{{ label }}</label>
 
       <textarea

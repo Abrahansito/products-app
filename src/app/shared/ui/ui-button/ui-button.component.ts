@@ -26,7 +26,6 @@ export class UiButtonComponent {
 
 // Define los tipos de variantes disponibles
   @Input() variant: 'primary' | 'secondary' | 'danger' | 'outline' = 'primary';
-
   @Output() onClick = new EventEmitter<void>();
 
   getStyleClass(): string {

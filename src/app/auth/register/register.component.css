@@ -1,0 +1,45 @@
+.register-container {
+    --surface-card: #1e293b;     /*Fondo Tarjeta*/
+    --surface-border: #334155;   /*Bordes*/
+
+    --text-color: #ffffff;       /*Texto Principal */
+    --text-color-secondary: #cbd5e1; /*Texto Secundario (Labels)*/
+
+    --input-bg: #0f172a;    /*Fondo Input*/
+
+    /*Layout Principal*/
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/*Ajuste del Título*/
+:host ::ng-deep .p-card-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/*Ajuste de Enlaces*/
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #34d399;
+}
+
+/*Botón de Iniciar Sesión*/
+:host ::ng-deep .p-button {
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+}

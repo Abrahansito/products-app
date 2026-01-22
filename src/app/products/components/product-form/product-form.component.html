@@ -1,4 +1,5 @@
-<p-dialog
+<div>
+  <p-dialog
     [(visible)]="visible"
     [modal]="true"
     [style]="{ width: '450px' }"
@@ -6,29 +7,33 @@
     (onHide)="closeDialog()"
     styleClass="p-fluid">
 
-    <form [formGroup]="form" class="flex flex-column gap-2 mt-3">
-
-        <app-ui-input-text
+    <form [formGroup]="form" class="flex-column">
+        <div>
+          <app-ui-input-text
             label="Nombre"
             placeholder="Nombre del producto"
-            [control]="nameControl"> </app-ui-input-text>
+            [control]="nameControl">
+          </app-ui-input-text>
 
-        <app-ui-input-textarea
+          <app-ui-input-textarea
             label="Descripción"
-            [control]="descControl"> </app-ui-input-textarea>
+            [control]="descControl">
+          </app-ui-input-textarea>
 
-        <app-ui-input-text
+           <app-ui-input-text
             label="Categoría"
             placeholder="Categoría del producto"
-            [control]="catControl"> </app-ui-input-text>
+            [control]="catControl">
+           </app-ui-input-text>
 
-        <app-ui-input-number
+          <app-ui-input-number
             label="Precio"
             mode="currency"
             currency="USD"
             locale="en-US"
-            [control]="priceControl"> </app-ui-input-number>
-
+            [control]="priceControl">
+          </app-ui-input-number>
+        </div>
     </form>
 
     <ng-template pTemplate="footer">
@@ -50,5 +55,6 @@
 
         </div>
     </ng-template>
+  </p-dialog>
+</div>
 
-</p-dialog>

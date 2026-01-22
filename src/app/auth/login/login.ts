@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../auth';
+import { AuthService } from '..//auth';
 import { finalize } from 'rxjs/operators';
+
 import { CardModule } from 'primeng/card';
 import { MessageModule } from 'primeng/message';
-import { ChangeDetectorRef } from '@angular/core';
 import { UiButtonComponent } from '../../shared/ui/ui-button/ui-button.component';
 import { UiInputTextComponent } from '../../shared/ui/ui-input-text/ui-input-text.component';
-import { FormControl } from '@angular/forms';
 import { UiInputPasswordComponent } from '../../shared/ui/ui-input-password/ui-input-password.component';
 
 @Component({
@@ -26,12 +25,12 @@ import { UiInputPasswordComponent } from '../../shared/ui/ui-input-password/ui-i
     UiInputPasswordComponent
   ],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
   form: FormGroup;
   loading = false;
-  errorMessage = ''; // Aquí guardaremos el texto del error
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -40,13 +39,13 @@ export class LoginComponent {
     private cd: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  // Getters para los controles del formulario
-  get username(): FormControl { return this.form.get('username') as FormControl; }
+  //Getters para el html
+  get email(): FormControl { return this.form.get('email') as FormControl; }
   get password(): FormControl { return this.form.get('password') as FormControl; }
 
   login(event?: Event) {
@@ -58,21 +57,28 @@ export class LoginComponent {
     }
 
     this.loading = true;
-    this.errorMessage = ''; // Limpiamos errores previos al intentar de nuevo
+    this.errorMessage = '';
 
+    // Enviamos email, password
     this.authService.login(this.form.value)
       .pipe(finalize(() => {
         this.loading = false;
         this.cd.markForCheck();
       }))
       .subscribe({
-        next: () => {
-          this.router.navigate(['/admin/products']);
+        next: (res: any) => { // res trae la respuesta del backend
+          
+          const role = res.role || this.authService.getRole();
+
+          if (role === 'admin') {
+            this.router.navigate(['/admin/products']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         },
         error: (error) => {
           console.error('Error login:', error);
-          // Guardamos el mensaje para mostrarlo en el HTML
-          this.errorMessage = error.error?.message || 'Credenciales incorrectas';
+          this.errorMessage = error.error?.message || 'Correo o contraseña incorrectos';
           this.cd.markForCheck();
         }
       });

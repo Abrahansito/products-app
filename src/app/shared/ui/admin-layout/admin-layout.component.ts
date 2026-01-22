@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AuthService } from './../../..//auth/auth';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +19,6 @@ import { MenuItem } from 'primeng/api';
   ],
   template: `
     <div class="layout-wrapper flex min-h-screen">
-
       <aside class="layout-sidebar text-white w-16rem flex-shrink-0 flex flex-column p-3"
        style="background-color: #0f172a;">
 
@@ -36,7 +36,7 @@ import { MenuItem } from 'primeng/api';
             <div class="flex align-items-center gap-3">
                 <span class="text-sm font-bold text-gray-600">Admin User</span>
                 <p-avatar label="A" shape="circle" styleClass="bg-primary text-white cursor-pointer"></p-avatar>
-                <p-button icon="pi pi-sign-out" [rounded]="true" [text]="true" severity="danger"></p-button>
+                <p-button icon="pi pi-sign-out" [rounded]="true" [text]="true" severity="danger" (onClick)="logout()" ></p-button>
             </div>
         </header>
 
@@ -50,6 +50,8 @@ import { MenuItem } from 'primeng/api';
 })
 
 export class AdminLayoutComponent {
+  private AuthService = inject(AuthService);
+
   items: MenuItem[] = [
     {
         label: 'Gestión',
@@ -59,4 +61,8 @@ export class AdminLayoutComponent {
         ]
     },
   ];
+
+  logout() {
+    this.AuthService.logout();
+  }
 }

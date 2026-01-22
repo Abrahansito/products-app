@@ -33,7 +33,7 @@ export class ProductFormComponent implements OnInit {
 
   visible: boolean = true;
 
-  // Definimos el formulario reactivo
+  //Definimos el formulario reactivo
   form: FormGroup;
 
   constructor(
@@ -41,7 +41,7 @@ export class ProductFormComponent implements OnInit {
       private productsService: ProductsService,
       private messageService: MessageService
   ) {
-    // Inicializamos el formulario con validaciones
+    //Inicializamos el formulario con validaciones
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', Validators.required],
@@ -52,7 +52,7 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.product) {
-      // Si estamos editando, llenamos el formulario automáticamente
+      //Si estamos editando, llenamos el formulario automáticamente
       this.form.patchValue(this.product);
     }
   }
@@ -66,7 +66,7 @@ export class ProductFormComponent implements OnInit {
   onSubmit() {
     //Validar antes de enviar
     if (this.form.invalid) {
-      this.form.markAllAsTouched(); // Muestra los errores rojos si faltan datos
+      this.form.markAllAsTouched(); //Muestra los errores rojos si faltan datos
       return;
     }
 

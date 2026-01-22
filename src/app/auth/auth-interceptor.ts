@@ -7,7 +7,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const token = localStorage.getItem('token');
 
-  // Clonar la petición y agregar el token si existe
   let authReq = req;
   if (token) {
     authReq = req.clone({
@@ -17,16 +16,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     });
   }
 
-  // Manejar errores de autenticación
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      // Si el error es 401 (no autorizado), limpiar token y redirigir al login
+      //Si el token expiró o es inválido
       if (error.status === 401) {
+        //Limpiamos todo para evitar inconsistencias
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        localStorage.removeItem('user_name');
         localStorage.removeItem('user');
+
         router.navigate(['/login']);
       }
-
       return throwError(() => error);
     })
   );

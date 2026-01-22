@@ -1,100 +1,83 @@
+:root {
+    /*Fondos*/
+    --surface-ground: #f1f5f9;
+    --surface-card: #ffffff;
+    --surface-border: #e2e8f0;
+    --surface-border-light: #f0f4f8;
+
+    /*Textos*/
+    --text-color: #1e293b;
+    --text-color-secondary: #64748b;
+    --text-color-tertiary: #94a3b8;
+
+    /*Inputs*/
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --input-border-hover: #a8b5c5;
+
+    /*Color Primario(Verde)*/
+    --primary-color: #10b981;
+    --primary-color-hover: #059669;
+    --primary-color-light: #d1fae5;
+    --primary-color-text: #ffffff;
+
+    /*Colores secundarios*/
+    --secondary-color: #6366f1;
+    --danger-color: #ef4444;
+    --danger-color-hover: #dc2626;
+    --warning-color: #f59e0b;
+
+    /*Sombras*/
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/*Estilos del body*/
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8fafc;
-    color: #334155;
+    color: var(--text-color);
+    background-color: var(--surface-ground);
 }
 
-
-.p-card, .card {
-    background-color: #ffffff !important;
-    color: #334155 !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-
+/*Tarjetas*/
+body .p-card {
+    background: var(--surface-card);
+    color: var(--text-color);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
 }
 
-
-.p-card-title, h3 {
-    color: #1e293b !important;
+body .p-card .p-card-title {
+    color: var(--text-color);
     font-weight: 700;
 }
 
-
-.p-datatable .p-datatable-thead > tr > th {
-    background-color: #f8fafc !important;
-    color: #475569 !important;
-    border-bottom: 2px solid #e2e8f0 !important;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
+/*Inputs*/
+body .p-inputtext {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    padding: 0.70rem 0.875rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 0.95rem;
 }
 
-
-.p-datatable .p-datatable-tbody > tr {
-    background-color: #ffffff !important;
-    color: #334155 !important;
-    border-bottom: 1px solid #f1f5f9 !important;
+body .p-inputtext:hover:enabled {
+    border-color: var(--input-border-hover);
 }
 
-/* Efecto Hover en las filas */
-.p-datatable .p-datatable-tbody > tr:hover {
-    background-color: #f1f5f9 !important;
+body .p-inputtext:enabled:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    outline: none;
 }
 
-/* Texto vacío */
-.p-datatable .p-datatable-emptymessage td {
-    background-color: #ffffff !important;
-    color: #64748b !important;
-}
-
-.p-inputtext:enabled:focus {
-    border-color: #10b981 !important;
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1) !important;
-}
-
-.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background-color: #10b981 !important;
-    color: #ffffff !important;
-    border-radius: 50%;
-}
-
-.p-error {
-    color: #ef4444 !important;
-}
-
-.p-datatable .p-datatable-header {
-    background-color: #ffffff !important;
-
-}
-
-.p-datatable-header .p-inputtext {
-    background-color: #ffffff !important;
-    color: #334155 !important;
-    border: 1px solid #cbd5e1 !important;
-}
-
-.p-datatable-header .p-inputtext::placeholder {
-    color: #94a3b8 !important;
-}
-
-.p-datatable-header .p-inputicon {
-    color: #64748b !important;
-}
-
-.p-paginator .p-paginator-current {
-    color: #1e293b !important;
-    font-weight: 700 !important;
-    opacity: 1 !important;
-    font-size: 0.95rem !important;
-}
-
-.p-paginator .p-paginator-pages .p-paginator-page {
-    color: #475569 !important;
-}
-
-.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background-color: #ecfdf5 !important;
-    color: #10b981 !important;
+/*Errores*/
+body .p-error {
+    color: var(--danger-color);
 }

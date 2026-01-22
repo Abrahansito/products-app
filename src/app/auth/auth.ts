@@ -1,109 +1,130 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
+//Interfaces según el backend
 export interface User {
-  id: number;
-  username: string;
-  email?: string;
+  id?: string;
+  full_name: string;
+  email: string;
+  role: string;
 }
 
 export interface AuthResponse {
   access_token: string;
+  role: string;
+  username?: string;
   user?: User;
+}
+
+export interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export interface RegisterPayload {
+  full_name: string;
+  email: string;
+  password: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private api = 'https://products-api-t9hi.onrender.com';
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
+  //Usamos la variable de entorno
+  private apiUrl = `${environment.apiUrl}/auth`;
+
+  //Estado del usuario actual
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {
-    this.loadUserFromStorage();
+  constructor() {
+    this.loadSession();
   }
 
-  private loadUserFromStorage() {
-    const userStr = localStorage.getItem('user');
+  //Cargar sesión si refrescan la página
+  private loadSession() {
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+    const name = localStorage.getItem('user_name'); //Guardamos el nombre para mostrarlo
 
-    if (!userStr || userStr === 'undefined' || userStr === 'null') {
-      localStorage.removeItem('user');
-      return;
-    }
-
-    try {
-      const user = JSON.parse(userStr);
-      if (user && user.id && user.username) {
-        this.currentUserSubject.next(user);
-      } else {
-        localStorage.removeItem('user');
-      }
-    } catch (e) {
-      console.error('Error parsing user from localStorage', e);
-      localStorage.removeItem('user');
+    if (token && role) {
+      //Reconstruimos un usuario básico basado en lo que tenemos guardado
+      this.currentUserSubject.next({
+        full_name: name || 'Usuario',
+        email: '',
+        role: role
+      });
     }
   }
 
-  login(data: { username: string; password: string }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.api}/auth/login`, data).pipe(
+  //LOGIN
+  login(credentials: LoginPayload): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
-        if (response && response.access_token) {
-          this.saveToken(response.access_token);
-        }
-        if (response && response.user) {
-          this.saveUser(response.user);
-          this.currentUserSubject.next(response.user);
+        if (response.access_token) {
+          //Guardar datos
+          localStorage.setItem('token', response.access_token);
+          localStorage.setItem('role', response.role);
+
+          if (response.username) {
+            localStorage.setItem('user_name', response.username);
+          }
+
+          //Actualizar estado en la app
+          this.currentUserSubject.next({
+            full_name: response.username || 'Usuario',
+            email: credentials.email,
+            role: response.role
+          });
         }
       })
     );
   }
 
-  register(data: { username: string; password: string; email?: string }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.api}/auth/register`, data).pipe(
-      tap(response => {
-        if (response && response.access_token) {
-          this.saveToken(response.access_token);
-        }
-        if (response && response.user) {
-          this.saveUser(response.user);
-          this.currentUserSubject.next(response.user);
-        }
-      })
-    );
+  //REGISTRO
+  register(data: RegisterPayload): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, data);
+    //El registro no loguea automáticamente, solo crea la cuenta.
   }
 
-  saveToken(token: string) {
-    if (token) {
-      localStorage.setItem('token', token);
-    }
+  //LOGOUT
+  logout() {
+    localStorage.clear(); //Borra todo (token, role, user)
+    this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 
-  saveUser(user: User) {
-    if (user && user.id && user.username) {
-      localStorage.setItem('user', JSON.stringify(user));
-    }
+  //Getters
+  getAllUsers(){
+    return this.http.get<any[]>(`${environment.apiUrl}/users`);
+  }
+
+  updateUser(id: string, data: any) {
+    return this.http.patch(`${environment.apiUrl}/users/${id}`, data);
+  }
+
+  deleteUser(id: string) {
+    return this.http.delete(`${environment.apiUrl}/users/${id}`);
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
+  getRole(): string | null {
+    return localStorage.getItem('role');
   }
 
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+  isAdmin(): boolean {
+    return this.getRole() === 'admin';
   }
 }

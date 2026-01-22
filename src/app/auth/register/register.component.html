@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+
+<div class="register-container flex justify-content-center align-items-center min-h-screen bg-gray-900">
+
+  <p-card header="Crear Cuenta" [style]="{ width: '100%', maxWidth: '400px' }" styleClass="p-fluid shadow-4">
+        <form [formGroup]="form" (submit)="register()">
+            <div class="mb-3">
+                <app-ui-input-text
+                    label="Nombre Completo"
+                    placeholder="Ej. Juan Pérez"
+                    [control]="full_name">
+                </app-ui-input-text>
+            </div>
+
+            <div class="mb-3">
+                <app-ui-input-text
+                    label="Correo Electrónico"
+                    placeholder="ejemplo@gmail.com"
+                    [control]="email">
+                </app-ui-input-text>
+            </div>
+
+            <div class="mb-3">
+                <app-ui-input-password
+                    label="Contraseña"
+                    [control]="password">
+                </app-ui-input-password>
+            </div>
+
+            <div class="mb-4">
+                <app-ui-input-password
+                    label="Confirmar Contraseña"
+                    [control]="confirmPassword">
+                </app-ui-input-password>
+
+                <small *ngIf="form.hasError('passwordMismatch') && confirmPassword.touched" class="p-error block mt-1">
+                    Las contraseñas no coinciden.
+                </small>
+            </div>
+
+            <div class="mb-3">
+              <app-ui-button
+                label="Registrarse"
+                variant="primary"
+                icon="pi pi-user-plus"
+                [loading]="loading"
+                (onClick)="register()">
+              </app-ui-button>
+            </div>
+
+            <div class="text-center mt-4 text-sm">
+                <span class="text-gray-400">¿Ya tienes cuenta? </span>
+                <a routerLink="/login" class="font-bold text-primary no-underline hover:underline cursor-pointer">
+                    Inicia sesión aquí
+                </a>
+            </div>
+        </form>
+    </p-card>
+</div>

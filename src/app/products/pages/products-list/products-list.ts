@@ -63,7 +63,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
           if (!term || term.trim() === '') {
             return this.productsService.getProducts().pipe(
               catchError(err => {
-                return of([]); // Retorna un array vacío en caso de error
+                return of([]); //Retorna un array vacío en caso de error
               })
             );
           }
@@ -135,6 +135,11 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   deleteProduct(productId: number) {
   this.confirmationService.confirm({
     message: '¿Estás seguro de eliminar este producto?',
+    header: 'Confirmar Eliminación',
+    icon: 'pi pi-exclamation-triangle',
+    acceptLabel: 'Sí, eliminar',
+    rejectLabel: 'Cancelar',
+    acceptButtonStyleClass: 'p-button-danger',
     accept: () => {
       this.productsService.deleteProduct(productId).subscribe({
         next: () => {
