@@ -47,6 +47,7 @@
                 <th pSortableColumn="description">Descripción <p-sortIcon field="description"></p-sortIcon></th>
                 <th pSortableColumn="price">Precio <p-sortIcon field="price"></p-sortIcon></th>
                 <th pSortableColumn="category">Categoría <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
                 <th>Acciones</th>
             </tr>
         </ng-template>
@@ -56,8 +57,14 @@
                 <td>{{ p.id }}</td>
                 <td class="font-bold">{{ p.name }}</td>
                 <td>{{ p.description }}</td>
-                <td>{{ p.price | currency:'USD' }}</td> <td>
+                <td>{{ p.price | currency:'USD' }}</td>
+                <td>
                     <span>{{ p.category }}</span>
+                </td>
+                 <td><p-tag
+                        [value]="p.stock"
+                        [rounded]="true">
+                    </p-tag>
                 </td>
                 <td>
                     <div class="flex gap-2">
@@ -83,7 +90,7 @@
 
         <ng-template pTemplate="emptymessage">
             <tr>
-                <td colspan="6" class="text-center p-4 text-gray-500">
+                <td colspan="7" class="text-center p-4 text-gray-500">
                     <i class="pi pi-inbox text-4xl mb-2 block"></i>
                     No se encontraron productos.
                 </td>

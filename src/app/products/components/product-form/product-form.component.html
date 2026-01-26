@@ -33,6 +33,13 @@
             locale="en-US"
             [control]="priceControl">
           </app-ui-input-number>
+
+          <app-ui-input-number
+            label="Stock"
+            [control]="stockControl"
+            errorMessage="El stock no puede ser negativo">
+          </app-ui-input-number>
+
         </div>
     </form>
 

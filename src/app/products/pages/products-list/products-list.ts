@@ -14,6 +14,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { TagModule } from 'primeng/tag';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { UiButtonComponent } from '../../../shared/ui/ui-button/ui-button.component';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-products-list',
@@ -34,8 +35,8 @@ import { UiButtonComponent } from '../../../shared/ui/ui-button/ui-button.compon
   styleUrls: ['./products-list.css']
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
-  products: any[] = [];
-  selectedProduct: any = null;
+  products: Product[] = [];
+  selectedProduct: Product | null = null;
   showModal = false;
   loading = false;
   errorMessage = '';
@@ -127,7 +128,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.showModal = true;
   }
 
-  openEdit(product: any): void {
+  openEdit(product: Product): void {
     this.selectedProduct = { ...product };
     this.showModal = true;
   }

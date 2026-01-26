@@ -9,6 +9,7 @@ import { UiButtonComponent } from '../../../shared/ui/ui-button/ui-button.compon
 import { UiInputTextComponent } from '../../../shared/ui/ui-input-text/ui-input-text.component';
 import { UiInputNumberComponent } from '../../../shared/ui/ui-input-number/ui-input-number.component';
 import { UiInputTextareaComponent } from '../../../shared/ui/ui-input-textarea/ui-input-textarea.component';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-product-form',
@@ -27,7 +28,7 @@ import { UiInputTextareaComponent } from '../../../shared/ui/ui-input-textarea/u
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
-  @Input() product: any = null;
+  @Input() product: Product | null = null;
   @Output() saved = new EventEmitter<void>();
   @Output() cancelled = new EventEmitter<void>();
 
@@ -46,7 +47,8 @@ export class ProductFormComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0.1)]],
-      category: ['', Validators.required]
+      category: ['', Validators.required],
+      stock: [0, [Validators.required, Validators.min(0)]],
     });
   }
 
@@ -62,6 +64,7 @@ export class ProductFormComponent implements OnInit {
   get descControl(): FormControl { return this.form.get('description') as FormControl; }
   get priceControl(): FormControl { return this.form.get('price') as FormControl; }
   get catControl(): FormControl { return this.form.get('category') as FormControl; }
+  get stockControl(): FormControl { return this.form.get('stock') as FormControl; }
 
   onSubmit() {
     //Validar antes de enviar
@@ -73,10 +76,9 @@ export class ProductFormComponent implements OnInit {
     //Obtener los datos del formulario limpio
     const productData = this.form.value;
 
-    if (this.product?.id) {
-       const productId = Number(String(this.product.id).split(':')[0]);
+    if (this.product && this.product.id) {
 
-       this.productsService.updateProduct(productId, productData).subscribe({
+       this.productsService.updateProduct(this.product.id, productData).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Producto actualizado' });
           this.closeDialog();
