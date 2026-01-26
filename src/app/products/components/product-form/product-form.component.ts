@@ -73,8 +73,17 @@ export class ProductFormComponent implements OnInit {
       return;
     }
 
-    //Obtener los datos del formulario limpio
-    const productData = this.form.value;
+    let productData = { ...this.form.value };
+
+    //Si el precio viene como texto, lo limpiamos
+    if (typeof productData.price === 'string') {
+        // Quitamos todo lo que no sea número o punto
+        const cleanPrice = productData.price.replace(/[^0-9.]/g, '');
+        productData.price = parseFloat(cleanPrice);
+    }
+
+    //Aseguramos que stock sea número
+    productData.stock = Number(productData.stock);
 
     if (this.product && this.product.id) {
 

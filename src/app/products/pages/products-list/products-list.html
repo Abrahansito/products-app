@@ -63,6 +63,7 @@
                 </td>
                  <td><p-tag
                         [value]="p.stock"
+                        [severity]="p.stock === 0 ? 'danger' : (p.stock < 10 ? 'warn' : 'success')"
                         [rounded]="true">
                     </p-tag>
                 </td>
