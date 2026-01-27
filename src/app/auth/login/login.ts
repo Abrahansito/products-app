@@ -67,11 +67,11 @@ export class LoginComponent {
       }))
       .subscribe({
         next: (res: any) => { // res trae la respuesta del backend
-          
+
           const role = res.role || this.authService.getRole();
 
           if (role === 'admin') {
-            this.router.navigate(['/admin/products']);
+            this.router.navigate(['/admin/dashboard']);
           } else {
             this.router.navigate(['/home']);
           }

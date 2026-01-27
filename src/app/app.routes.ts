@@ -34,6 +34,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: { role: 'admin' },
     children: [
+
       { path:'dashboard',
         loadComponent: ()=> import ('./products/pages/products-list/dashboard/dashboard.component').then(m=>m.DashboardComponent)
       },
@@ -42,7 +43,7 @@ export const routes: Routes = [
         path: 'products',
         loadComponent: () => import('./products/pages/products-list/products-list').then(m => m.ProductsListComponent)
       },
-      
+
       {
         path: 'users',
         loadComponent: () => import('./users/pages/users-list/users-list.component').then(m => m.UsersListComponent)

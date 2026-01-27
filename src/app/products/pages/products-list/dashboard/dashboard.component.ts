@@ -9,15 +9,17 @@ import { AuthService } from '../../../../auth/auth';
 import { Product } from '../../../interfaces/product.interface';
 import { RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, CardModule, ChartModule, TableModule, ButtonModule, RouterLink],
+  imports: [CommonModule, CardModule, ChartModule, TableModule, ButtonModule, RouterLink, SkeletonModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  isLoading: boolean = true;
 
   private productsService = inject(ProductsService);
   private authService = inject(AuthService);
@@ -44,6 +46,7 @@ export class DashboardComponent implements OnInit {
   }
 
   loadDashboardData() {
+    this.isLoading = true;
   //Usamos forkJoin para unir las peticiones
   forkJoin({
     products: this.productsService.getProducts(),
@@ -64,11 +67,14 @@ export class DashboardComponent implements OnInit {
       //Lógica de Usuarios
       this.totalUsers = users.length;
 
+      this.isLoading = false;
       //Actualizamos la vista una sola vez al final
       this.cdr.detectChanges();
     },
     error: (err) => {
       console.error('Error cargando datos del dashboard', err);
+      this.isLoading = false;
+      this.cdr.detectChanges();
     }
   });
 }
