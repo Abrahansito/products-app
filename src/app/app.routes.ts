@@ -34,18 +34,22 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: { role: 'admin' },
     children: [
+      { path:'dashboard',
+        loadComponent: ()=> import ('./products/pages/products-list/dashboard/dashboard.component').then(m=>m.DashboardComponent)
+      },
+
       {
         path: 'products',
         loadComponent: () => import('./products/pages/products-list/products-list').then(m => m.ProductsListComponent)
       },
-      //Nueva ruta para ver usuarios
+      
       {
         path: 'users',
         loadComponent: () => import('./users/pages/users-list/users-list.component').then(m => m.UsersListComponent)
       },
       {
         path: '',
-        redirectTo: 'products',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       }
     ]

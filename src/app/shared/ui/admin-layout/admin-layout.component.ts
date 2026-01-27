@@ -54,8 +54,8 @@ export class AdminLayoutComponent {
 
   items: MenuItem[] = [
     {
-        label: 'Gestión',
         items: [
+            { label: 'Dashboard', icon: 'pi pi-home', routerLink: '/admin/dashboard'},
             { label: 'Productos', icon: 'pi pi-box', routerLink: '/admin/products' },
             { label: 'Usuarios', icon: 'pi pi-users', routerLink: '/admin/users' }
         ]
