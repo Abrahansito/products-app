@@ -1,12 +1,11 @@
 /*CONTENEDOR PRINCIPAL */
 :host ::ng-deep .shadow-2 {
-    border-radius: 14px !important;
+    border-radius: 12px !important;
     border: 1px solid var(--surface-border);
 }
 
 /*CABECERA DE LA TABLA*/
 :host ::ng-deep .p-datatable .p-datatable-header {
-    background-color: var(--surface-card);
     padding: 1.5rem;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -17,7 +16,6 @@
 :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
     background-color: #f8fafc;
     color: var(--text-color);
-    border-bottom: 2px solid var(--surface-border);
     padding: 1rem;
     font-weight: 700;
     font-size: 0.90rem;
@@ -25,13 +23,8 @@
     letter-spacing: 0.5px;
 }
 
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th .p-sorticon {
-    color: var(--primary-color);
-}
-
 /*FILAS DE LA TABLA*/
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr{
-    background-color: var(--surface-card);
     color: var(--text-color);
     transition: all 0.2s ease;
 
@@ -42,7 +35,7 @@
     vertical-align: middle;
 }
 
-/*Efecto Hover (Al pasar el mouse) */
+/*Efecto Hover (Al pasar el mouse)*/
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
     background-color: #d3d3d3;
     box-shadow: inset 0 0 0 1px var(--surface-border);
@@ -51,8 +44,6 @@
 
 /*Pie de página*/
 :host ::ng-deep .p-paginator {
-    background-color: var(--surface-card);
-    border-radius: 1px;
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--surface-border);
     border-bottom-left-radius: 12px;
@@ -73,13 +64,6 @@
     border-color: var(--surface-border);
 }
 
-/*Página Activa*/
-:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    font-weight: 600;
-}
 
 /*Botones de navegación del paginador*/
 :host ::ng-deep .p-paginator .p-paginator-prev,

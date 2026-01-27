@@ -32,7 +32,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 export class UiInputNumberComponent {
   @Input() label: string = '';
   @Input() control!: FormControl;
-  @Input() mode: 'decimal' | 'currency' = 'decimal'; // Para elegir si es dinero o número simple
-  @Input() currency: string = 'USD'; // PEN o USD
-  @Input() locale: string = 'en-US'; // es-PE para Perú
+  @Input() mode: 'decimal' | 'currency' = 'decimal'; //Para elegir si es dinero o número simple
+  @Input() currency: string = 'USD'; //PEN o USD
+  @Input() locale: string = 'en-US'; //es-PE para Perú
 }

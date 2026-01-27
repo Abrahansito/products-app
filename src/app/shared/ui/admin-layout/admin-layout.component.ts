@@ -26,7 +26,7 @@ import { MenuItem } from 'primeng/api';
             <h2 class="m-0 text-white font-bold">Panel<br>Administrativo</h2>
         </div>
 
-        <p-menu [model]="items" styleClass="w-full border-none bg-transparent p-0"></p-menu>
+        <p-menu [model]="items" styleClass=" sidebar-menu w-full border-none bg-transparent p-0"></p-menu>
       </aside>
 
       <div class="layout-main flex-grow-1 flex flex-column bg-gray-50">
@@ -46,6 +46,15 @@ import { MenuItem } from 'primeng/api';
 
       </div>
     </div>
+  `,
+  styles: `
+    :host ::ng-deep .sidebar-menu {
+        --p-menu-item-color: #ffffff;      /*Texto blanco*/
+        --p-menu-item-icon-color: #cbd5e1; /*Icono gris claro*/
+
+        --p-menu-item-focus-background: rgba(255, 255, 255, 0.1); /*Fondo semitransparente*/
+        --p-menu-item-focus-color: #ffffff;     /*Asegura que el texto siga blanco al seleccionarlo*/
+    }
   `,
 })
 

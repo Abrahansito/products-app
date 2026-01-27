@@ -1,12 +1,11 @@
 /*CONTENEDOR PRINCIPAL*/
 :host ::ng-deep .shadow-2 {
-    border-radius: 12px !important;
+    border-radius: 12px;
     border: 1px solid var(--surface-border);
 }
 
 /*CABECERA DE LA TABLA*/
 :host ::ng-deep .p-datatable .p-datatable-header {
-    background-color: var(--surface-card);
     padding: 1.5rem;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -16,14 +15,12 @@
 :host ::ng-deep .p-datatable .p-datatable-header h3 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--text-color);
 }
 
 /*ENCABEZADOS DE COLUMNAS*/
 :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
     background-color: #f8fafc;
     color: var(--text-color);
-    border-bottom: 2px solid var(--surface-border);
     padding: 1rem;
     font-weight: 700;
     font-size: 0.90rem;
@@ -31,13 +28,8 @@
     letter-spacing: 0.5px;
 }
 
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th .p-sorticon {
-    color: var(--primary-color);
-}
-
 /*FILAS DE LA TABLA*/
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr {
-    background-color: var(--surface-card);
     color: var(--text-color);
     transition: all 0.2s ease;
     border-bottom: 1px solid var(--surface-border-light);
@@ -54,15 +46,8 @@
     box-shadow: inset 0 0 0 1px var(--surface-border);
 }
 
-/* Texto en negrita para nombres */
-:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td .font-bold {
-    color: var(--text-color);
-    font-weight: 600;
-}
-
 /*INPUT DEL BUSCADOR*/
 :host ::ng-deep .p-datatable .p-inputtext {
-    border: 1px solid var(--input-border);
     padding: 0.600rem 0.875rem 0.450rem 2.5rem;
     min-width: 250px;
     border-radius: 8px;
@@ -75,9 +60,8 @@
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
-/*PAGINADOR (Pie de página)*/
+/*Pie de página*/
 :host ::ng-deep .p-paginator {
-    background-color: var(--surface-card);
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--surface-border);
     border-bottom-left-radius: 12px;
@@ -98,30 +82,9 @@
     border-color: var(--surface-border);
 }
 
-/* Página Activa */
-:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    font-weight: 600;
-}
 
 /* Botones de navegación del paginador */
 :host ::ng-deep .p-paginator .p-paginator-prev,
 :host ::ng-deep .p-paginator .p-paginator-next {
     transition: all 0.2s;
-}
-
-/*MENSAJE VACÍO */
-:host ::ng-deep .p-datatable .p-datatable-emptymessage td {
-    background-color: var(--surface-card);
-    color: var(--text-color-secondary);
-    text-align: center;
-    padding: 3rem 2rem;
-    border-bottom: 1px solid var(--surface-border);
-}
-
-:host ::ng-deep .p-datatable .p-datatable-emptymessage .pi {
-    color: var(--text-color-tertiary);
-    margin-bottom: 1rem;
 }

@@ -18,7 +18,10 @@ export const appConfig: ApplicationConfig = {
     MessageService,
     providePrimeNG({
             theme: {
-                preset: Aura
+                preset: Aura,
+                options: {
+                darkModeSelector: false // modo blanco
+            }
             }
         })
   ]

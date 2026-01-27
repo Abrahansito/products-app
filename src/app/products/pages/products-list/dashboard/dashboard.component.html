@@ -4,8 +4,8 @@
         <div class="bg-white text-800 shadow-2 p-3 border-round">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-100 font-medium mb-3">Productos</span>
-                    <div *ngIf="!isLoading" class="text-100 font-medium text-xl">{{ totalProducts }}</div>
+                    <span class="block text-900 font-medium mb-3">Productos</span>
+                    <div *ngIf="!isLoading" class="text-900 font-medium text-xl">{{ totalProducts }}</div>
                     <p-skeleton *ngIf="isLoading" width="5rem" height="2rem"></p-skeleton>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -14,7 +14,7 @@
             </div>
           <div *ngIf="!isLoading">
             <span class="text-green-500 font-medium">Activos </span>
-            <span class="text-100">en catálogo</span>
+            <span class="text-900">en catálogo</span>
           </div>
           <p-skeleton *ngIf="isLoading" width="8rem" height="1rem" styleClass="mt-2"></p-skeleton>
         </div>
@@ -24,8 +24,8 @@
         <div class="bg-white text-800 shadow-2 p-3 border-round">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-100 font-medium mb-3">Usuarios</span>
-                    <div *ngIf="!isLoading" class="text-100 font-medium text-xl">{{ totalUsers }}</div>
+                    <span class="block text-900 font-medium mb-3">Usuarios</span>
+                    <div *ngIf="!isLoading" class="text-900 font-medium text-xl">{{ totalUsers }}</div>
                     <p-skeleton *ngIf="isLoading" width="4rem" height="2rem"></p-skeleton>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <span *ngIf="!isLoading" class="text-green-500 font-medium">Registrados </span>
-            <span *ngIf="!isLoading" class="text-100">en el sistema</span>
+            <span *ngIf="!isLoading" class="text-900">en el sistema</span>
             <p-skeleton *ngIf="isLoading" width="10rem" height="1rem" styleClass="mt-2"></p-skeleton>
         </div>
     </div>
@@ -42,15 +42,15 @@
         <div class="bg-white text-800 shadow-2 p-3 border-round">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-100 font-medium mb-3">Valor Inventario</span>
-                    <div *ngIf="!isLoading" class="text-100 font-medium text-xl">{{ totalInventoryValue | currency:'USD' }}</div>
+                    <span class="block text-900 font-medium mb-3">Valor Inventario</span>
+                    <div *ngIf="!isLoading" class="text-900 font-medium text-xl">{{ totalInventoryValue | currency:'USD' }}</div>
                     <p-skeleton *ngIf="isLoading" width="8rem" height="2rem"></p-skeleton>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-green-100 border-round" style="width:2.5rem;height:2.5rem">
                     <i class="pi pi-dollar text-green-500 text-xl"></i>
                 </div>
             </div>
-            <span *ngIf="!isLoading" class="text-100">Suma de precio x stock</span>
+            <span *ngIf="!isLoading" class="text-900">Suma de precio x stock</span>
             <p-skeleton *ngIf="isLoading" width="9rem" height="1rem" styleClass="mt-2"></p-skeleton>
         </div>
     </div>
@@ -59,8 +59,8 @@
         <div class="bg-white text-800 shadow-2 p-3 border-round">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-100 font-medium mb-3">Stock Crítico</span>
-                    <div *ngIf="!isLoading" class="text-100 font-medium text-xl">{{ lowStockCount }}</div>
+                    <span class="block text-900 font-medium mb-3">Stock Crítico</span>
+                    <div *ngIf="!isLoading" class="text-900 font-medium text-xl">{{ lowStockCount }}</div>
                     <p-skeleton *ngIf="isLoading" width="3rem" height="2rem"></p-skeleton>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-red-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -77,7 +77,7 @@
 
     <div class="col-12 xl:col-6">
         <div class="bg-white text-800 shadow-2 p-4 border-round">
-            <h5 class="text-xl font-bold mb-4 text-100">Stock por Categoría</h5>
+            <h5 class="text-xl font-bold mb-4 text-900">Stock por Categoría</h5>
             <p-chart *ngIf="!isLoading" type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
             <p-skeleton *ngIf="isLoading" height="300px" width="100%"></p-skeleton>
         </div>
@@ -86,7 +86,7 @@
     <div class="col-12 xl:col-6">
         <div class="bg-white text-800 shadow-2 p-4 border-round">
             <div class="flex justify-content-between align-items-center mb-4">
-                <h5 class="text-xl font-bold m-0 text-100">Productos Recientes</h5>
+                <h5 class="text-xl font-bold m-0 text-900">Productos Recientes</h5>
                 <p-button label="Ver todos" icon="pi pi-arrow-right" iconPos="right" styleClass="p-button-text" routerLink="/admin/products"></p-button>
             </div>
 

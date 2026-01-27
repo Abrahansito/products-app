@@ -24,16 +24,16 @@ export class UiButtonComponent {
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
 
-// Define los tipos de variantes disponibles
+//Tipos de variantes disponibles
   @Input() variant: 'primary' | 'secondary' | 'danger' | 'outline' = 'primary';
   @Output() onClick = new EventEmitter<void>();
 
   getStyleClass(): string {
-    const base = 'w-full '; // Clase base para ancho completo
+    const base = 'w-full '; //Clase base para ancho completo
 
     switch (this.variant) {
       case 'primary':
-        return base + 'p-button-success'; // Verde actual
+        return base + 'p-button-success'; //Verde actual
       case 'danger':
         return base + 'p-button-danger';
       case 'secondary':

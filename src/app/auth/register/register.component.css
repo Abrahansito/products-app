@@ -1,13 +1,5 @@
-.register-container {
-    --surface-card: #1e293b;     /*Fondo Tarjeta*/
-    --surface-border: #334155;   /*Bordes*/
-
-    --text-color: #ffffff;       /*Texto Principal */
-    --text-color-secondary: #cbd5e1; /*Texto Secundario (Labels)*/
-
-    --input-bg: #0f172a;    /*Fondo Input*/
-
-    /*Layout Principal*/
+.register-container{
+    background-color: transparent;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -16,30 +8,50 @@
     box-sizing: border-box;
 }
 
-/*Ajuste del Título*/
+/*Tarjeta*/
+:host ::ng-deep .p-card {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border: 1px solid #334155 !important;
+}
+
+/*Ajustes de tamaño del título*/
 :host ::ng-deep .p-card-title {
+    color: #ffffff !important;
     text-align: center;
     font-size: 25px;
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
 
-/*Ajuste de Enlaces*/
+/*Inputs*/
+:host ::ng-deep .p-inputtext {
+    background-color: #0f172a !important; /*Fondo Input Oscuro */
+    color: #ffffff !important;             /*Texto Blanco */
+    border: 1px solid #334155 !important;  /*Borde Gris */
+}
+
+/*Focus verde*/
+:host ::ng-deep .p-inputtext:focus {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+
+/*Iconos (Ojos de contraseña, etc)*/
+:host ::ng-deep .p-input-icon-right > i,
+:host ::ng-deep .p-password-show-icon,
+:host ::ng-deep .p-password-hide-icon {
+    color: #cbd5e1 !important; /*Gris claro*/
+}
+
+/*Texto de labels y enlaces*/
+:host ::ng-deep label {
+    color: #ffffff !important; /*labels blancos*/
+}
 a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
+    color: #10b981 !important;
 }
 
-a:hover {
-    color: #34d399;
-}
-
-/*Botón de Iniciar Sesión*/
-:host ::ng-deep .p-button {
-    width: 100%;
-    justify-content: center;
-    font-weight: bold;
+:host ::ng-deep .text-center.text-500 {
+    color:#ffffff !important;
 }
